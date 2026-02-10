@@ -5,10 +5,13 @@ Nuxt 3とNuxt Content v2を使用した個人ブログサイト。Markdownでコ
 
 ## 技術スタック
 - **Nuxt 3**: Vue.jsベースのフレームワーク
-- **Nuxt Content v2**: Markdownコンテンツ管理
-- **TailwindCSS**: スタイリング
+- **Nuxt Content v3**: Markdownコンテンツ管理（queryCollection API）
+- **TailwindCSS**: スタイリング（ダークモード対応）
 - **TypeScript**: 型安全性
 - **Biome**: Linter/Formatter
+- **Vitest**: ユニットテスト
+- **Playwright**: E2Eテスト
+- **Storybook**: コンポーネントカタログ
 - **Vercel**: デプロイ先
 
 ## コーディング規約
@@ -48,27 +51,44 @@ Nuxt 3とNuxt Content v2を使用した個人ブログサイト。Markdownでコ
 ## フォルダ構造
 ```
 nuxt-blog2/
+├── .storybook/        # Storybook設定
 ├── assets/css/        # グローバルスタイル
 ├── components/        # Vueコンポーネント
 ├── composables/       # Composition API関数
 ├── content/blog/      # Markdown記事
+├── e2e/               # Playwright E2Eテスト
 ├── layouts/           # レイアウト
 ├── pages/             # ページコンポーネント
 ├── public/            # 静的ファイル
+├── stories/           # Storybookストーリー
+├── tests/             # Vitestユニットテスト
 ├── types/             # 型定義
 └── utils/             # ユーティリティ関数
 ```
 
 ## コマンド一覧
 ```bash
+# 開発
 pnpm dev        # 開発サーバー起動
 pnpm build      # 本番ビルド
 pnpm generate   # 静的生成
 pnpm preview    # ビルドプレビュー
+
+# コード品質
 pnpm check      # Biomeチェック（lint + format）
 pnpm lint       # Biome lint
 pnpm format     # Biome format
 pnpm typecheck  # 型チェック
+
+# テスト
+pnpm test       # Vitest（ウォッチモード）
+pnpm test:run   # Vitest（1回実行）
+pnpm test:e2e   # Playwright E2Eテスト
+pnpm test:e2e:ui # Playwright UIモード
+
+# Storybook
+pnpm storybook       # Storybook起動（port 6006）
+pnpm build-storybook # Storybookビルド
 ```
 
 ## Security Rules
