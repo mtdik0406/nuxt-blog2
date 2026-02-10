@@ -23,7 +23,7 @@ export default defineNuxtConfig({
   },
 
   site: {
-    url: process.env.NUXT_PUBLIC_SITE_URL || "https://example.com",
+    url: "https://example.com",
     name: "Blog",
   },
 
