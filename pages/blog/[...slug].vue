@@ -16,8 +16,13 @@ if (!post.value) {
   });
 }
 
-useHead({
+useSeoMeta({
   title: post.value?.title,
+  description: post.value?.description,
+  ogTitle: post.value?.title,
+  ogDescription: post.value?.description,
+  ogType: "article",
+  twitterCard: "summary",
 });
 
 const { data: surroundings } = await useAsyncData(
