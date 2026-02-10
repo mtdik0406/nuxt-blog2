@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Post } from "~/types";
-
 const route = useRoute();
 const tag = computed(() => route.params.tag as string);
 
@@ -8,12 +6,12 @@ useHead({
   title: `#${tag.value} - Blog`,
 });
 
-const { data: posts } = await useAsyncData(`posts-tag-${tag.value}`, () =>
-  queryCollection<Post>("content")
-    .where("_path", "LIKE", "/blog/%")
-    .where("tags", "ARRAY_CONTAINS", tag.value)
-    .order("date", "DESC")
-    .all(),
+const { data: allPosts } = await useAsyncData(`posts-tag-${tag.value}`, () =>
+  queryCollection("blog").order("date", "DESC").all(),
+);
+
+const posts = computed(() =>
+  allPosts.value?.filter((post) => post.tags?.includes(tag.value)) ?? [],
 );
 </script>
 
@@ -33,7 +31,7 @@ const { data: posts } = await useAsyncData(`posts-tag-${tag.value}`, () =>
     </h1>
 
     <div v-if="posts && posts.length > 0" class="space-y-6">
-      <PostCard v-for="post in posts" :key="post._path" :post="post" />
+      <PostCard v-for="post in posts" :key="post.path" :post="post" />
     </div>
 
     <p v-else class="text-gray-600 dark:text-gray-400">
