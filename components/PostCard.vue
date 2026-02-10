@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import type { Post } from "~/types";
-
 defineProps<{
-  post: Post;
+  post: {
+    path: string;
+    title: string;
+    description?: string;
+    date: string;
+    tags?: string[];
+  };
 }>();
 </script>
 
@@ -10,7 +14,7 @@ defineProps<{
   <article
     class="p-6 bg-white dark:bg-gray-800 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
   >
-    <NuxtLink :to="post._path" class="block group">
+    <NuxtLink :to="post.path" class="block group">
       <h2
         class="text-xl font-bold text-gray-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors"
       >

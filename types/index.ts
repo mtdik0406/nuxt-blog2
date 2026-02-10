@@ -1,5 +1,5 @@
 export interface Post {
-  _path: string;
+  path: string;
   title: string;
   description: string;
   date: string;

@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import type { Post } from "~/types";
-
 const route = useRoute();
 const slug = computed(() => {
   const params = route.params.slug;
@@ -8,9 +6,7 @@ const slug = computed(() => {
 });
 
 const { data: post } = await useAsyncData(`post-${slug.value}`, () =>
-  queryCollection<Post>("content")
-    .where("_path", "=", `/blog/${slug.value}`)
-    .first(),
+  queryCollection("blog").path(`/blog/${slug.value}`).first(),
 );
 
 if (!post.value) {
@@ -27,8 +23,8 @@ useHead({
 const { data: surroundings } = await useAsyncData(
   `surroundings-${slug.value}`,
   () =>
-    queryCollectionItemSurroundings("content", `/blog/${slug.value}`, {
-      fields: ["_path", "title"],
+    queryCollectionItemSurroundings("blog", `/blog/${slug.value}`, {
+      fields: ["path", "title"],
     }),
 );
 
@@ -60,7 +56,7 @@ const nextPost = computed(() => surroundings.value?.[1]);
       <div class="flex justify-between gap-4">
         <NuxtLink
           v-if="prevPost"
-          :to="prevPost._path"
+          :to="prevPost.path"
           class="flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors"
         >
           <span class="text-sm text-gray-500 dark:text-gray-400">Previous</span>
@@ -72,7 +68,7 @@ const nextPost = computed(() => surroundings.value?.[1]);
 
         <NuxtLink
           v-if="nextPost"
-          :to="nextPost._path"
+          :to="nextPost.path"
           class="flex-1 p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:border-blue-500 dark:hover:border-blue-400 transition-colors text-right"
         >
           <span class="text-sm text-gray-500 dark:text-gray-400">Next</span>

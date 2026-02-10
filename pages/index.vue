@@ -1,15 +1,10 @@
 <script setup lang="ts">
-import type { Post } from "~/types";
-
 useHead({
   title: "Blog",
 });
 
 const { data: posts } = await useAsyncData("posts", () =>
-  queryCollection<Post>("content")
-    .where("_path", "LIKE", "/blog/%")
-    .order("date", "DESC")
-    .all(),
+  queryCollection("blog").order("date", "DESC").all(),
 );
 </script>
 
@@ -20,7 +15,7 @@ const { data: posts } = await useAsyncData("posts", () =>
     </h1>
 
     <div v-if="posts && posts.length > 0" class="space-y-6">
-      <PostCard v-for="post in posts" :key="post._path" :post="post" />
+      <PostCard v-for="post in posts" :key="post.path" :post="post" />
     </div>
 
     <p v-else class="text-gray-600 dark:text-gray-400">記事がまだありません。</p>

@@ -5,11 +5,7 @@ export default defineNuxtConfig({
 
   modules: ["@nuxt/content", "@nuxtjs/tailwindcss", "@nuxtjs/color-mode"],
 
-  content: {
-    highlight: {
-      theme: "github-dark",
-    },
-  },
+  content: {},
 
   colorMode: {
     classSuffix: "",

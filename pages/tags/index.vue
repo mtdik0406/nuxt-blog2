@@ -1,21 +1,16 @@
 <script setup lang="ts">
-import type { Post } from "~/types";
-
 useHead({
   title: "Tags - Blog",
 });
 
-const { data: posts } = await useAsyncData("all-posts", () =>
-  queryCollection<Post>("content")
-    .where("_path", "LIKE", "/blog/%")
-    .select("tags")
-    .all(),
+const { data: posts } = await useAsyncData("all-posts-tags", () =>
+  queryCollection("blog").select("tags").all(),
 );
 
 const tags = computed(() => {
   const tagCount = new Map<string, number>();
   posts.value?.forEach((post) => {
-    post.tags?.forEach((tag) => {
+    post.tags?.forEach((tag: string) => {
       tagCount.set(tag, (tagCount.get(tag) || 0) + 1);
     });
   });
