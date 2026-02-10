@@ -1,75 +1,81 @@
-# Nuxt Minimal Starter
+# Nuxt Blog
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+Nuxt 3 + Nuxt Content v2で構築した個人ブログサイト。
 
-## Setup
+## 特徴
 
-Make sure to install dependencies:
+- Markdownでコンテンツ管理
+- ダークモード対応
+- レスポンシブデザイン
+- SEO最適化
+- 高速な静的生成
+
+## 技術スタック
+
+- [Nuxt 3](https://nuxt.com/)
+- [Nuxt Content v2](https://content.nuxt.com/)
+- [TailwindCSS](https://tailwindcss.com/)
+- [TypeScript](https://www.typescriptlang.org/)
+
+## セットアップ
 
 ```bash
-# npm
-npm install
-
-# pnpm
+# 依存関係のインストール
 pnpm install
 
-# yarn
-yarn install
-
-# bun
-bun install
-```
-
-## Development Server
-
-Start the development server on `http://localhost:3000`:
-
-```bash
-# npm
-npm run dev
-
-# pnpm
+# 開発サーバー起動
 pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
 ```
 
-## Production
+開発サーバーは http://localhost:3000 で起動します。
 
-Build the application for production:
+## 開発コマンド
 
 ```bash
-# npm
-npm run build
-
-# pnpm
-pnpm build
-
-# yarn
-yarn build
-
-# bun
-bun run build
+pnpm dev        # 開発サーバー起動
+pnpm build      # 本番ビルド
+pnpm generate   # 静的生成
+pnpm preview    # ビルドプレビュー
+pnpm check      # Biomeチェック（lint + format）
+pnpm typecheck  # 型チェック
 ```
 
-Locally preview production build:
+## ディレクトリ構造
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+```
+nuxt-blog2/
+├── assets/css/        # グローバルスタイル
+├── components/        # Vueコンポーネント
+├── composables/       # Composition API関数
+├── content/blog/      # Markdown記事
+├── layouts/           # レイアウト
+├── pages/             # ページコンポーネント
+├── public/            # 静的ファイル
+├── types/             # 型定義
+└── utils/             # ユーティリティ関数
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+## 記事の追加
+
+`content/blog/` ディレクトリにMarkdownファイルを追加します。
+
+```markdown
+---
+title: 記事タイトル
+description: 記事の説明
+date: 2024-01-01
+tags:
+  - タグ1
+  - タグ2
+---
+
+記事の本文...
+```
+
+## デプロイ
+
+Vercelで自動デプロイされます。`main`ブランチへのプッシュで本番環境に反映されます。
+
+## ライセンス
+
+MIT
